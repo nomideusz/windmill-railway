@@ -38,7 +38,7 @@ The stack is four services: Windmill, Worker, Native Worker and Postgres.
 
 **Teammates.** Add them under Instance settings → Users, or invite them from a workspace's settings. Railway only allows outbound SMTP on the Pro plan, so on other plans no email is sent: create the user with a password, or invite them and tell them the URL.
 
-**Memory.** Around 400 MB at idle: about 230 MB for the server, 40 MB for each worker and 100 MB for Postgres. Jobs use what they need on top, so a Python job with heavy dependencies briefly needs a few hundred MB more on the Worker. Workers cache installed dependencies on local disk; the cache starts empty after each redeploy, so the first run of a script after a deploy reinstalls its packages.
+**Memory.** Around 0.9 GB at idle on Railway: about 480 MB for the server, 55 MB for the Worker, 45 MB for the Native Worker and 300 MB for Postgres (mostly cache). The server alone is close to the Trial plan's limit, so deploy on Hobby or above. Jobs use what they need on top, so a Python job with heavy dependencies briefly needs a few hundred MB more on the Worker. Workers cache installed dependencies on local disk; the cache starts empty after each redeploy, so the first run of a script after a deploy reinstalls its packages.
 
 **More throughput.** Raise the Worker service's replicas in Railway, or set `NUM_WORKERS` on it to run several jobs at once in one container. Worker groups and their tags are configured in Windmill under Workers.
 

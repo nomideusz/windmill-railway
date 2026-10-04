@@ -4,5 +4,6 @@
   "description": "Windmill scripts, flows and apps with workers and a superadmin on boot",
   "category": "Automation",
   "image": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/windmill.svg",
-  "card_desc": "Windmill developer platform: turn Python, TypeScript, Bash and SQL scripts into flows, webhooks, cron jobs and internal apps, with a worker and a native worker, and your superadmin created on first boot."
+  "card_desc": "Windmill developer platform: turn Python, TypeScript, Bash and SQL scripts into flows, webhooks, cron jobs and internal apps, with a worker and a native worker, and your superadmin created on first boot.",
+  "id": "6cf2b4e0-27b4-4897-9d72-d4f1bbac7960"
 }
