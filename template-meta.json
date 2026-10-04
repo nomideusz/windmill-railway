@@ -1,0 +1,8 @@
+{
+  "name": "Windmill | Open-Source Retool and Airflow Alternative",
+  "short_name": "Windmill Dev",
+  "description": "Windmill scripts, flows and apps with workers and a superadmin on boot",
+  "category": "Automation",
+  "image": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/windmill.svg",
+  "card_desc": "Windmill developer platform: turn Python, TypeScript, Bash and SQL scripts into flows, webhooks, cron jobs and internal apps, with a worker and a native worker, and your superadmin created on first boot."
+}

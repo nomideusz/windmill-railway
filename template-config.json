@@ -1,0 +1,215 @@
+{
+  "services": {
+    "dd2896b2-5210-4de5-a48b-a5e0965486bb": {
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/windmill.svg",
+      "name": "Windmill",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": "/api/version",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/nomideusz/windmill-railway",
+        "rootDirectory": "/server"
+      },
+      "networking": {
+        "serviceDomains": {
+          "<hasDomain>": {}
+        }
+      },
+      "variables": {
+        "PORT": {
+          "defaultValue": "8000",
+          "description": "Port the Windmill server listens on - leave as is",
+          "isOptional": false
+        },
+        "MODE": {
+          "defaultValue": "server",
+          "description": "Runs the API and web app; jobs run on the worker services",
+          "isOptional": false
+        },
+        "SERVER_BIND_ADDR": {
+          "defaultValue": "::",
+          "description": "Listen on IPv6 too, so the workers reach the server over Railway's private network",
+          "isOptional": false
+        },
+        "WINDMILL_ADMIN_EMAIL": {
+          "defaultValue": "",
+          "description": "Your email - the superadmin login, created on first boot in place of Windmill's default admin@windmill.dev",
+          "isOptional": false
+        },
+        "WINDMILL_ADMIN_PASSWORD": {
+          "defaultValue": "${{secret(20, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Superadmin password, set on first boot only - copy it from here to log in, then change it in Windmill",
+          "isOptional": false
+        },
+        "BASE_URL": {
+          "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+          "description": "Public URL used in webhooks and links - set it to your custom domain after adding one",
+          "isOptional": false
+        },
+        "DATABASE_URL": {
+          "defaultValue": "postgres://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}?sslmode=disable",
+          "description": "Postgres on the private network",
+          "isOptional": false
+        },
+        "RAILWAY_HEALTHCHECK_TIMEOUT_SEC": {
+          "defaultValue": "600",
+          "description": "First boot runs several hundred database migrations before the health check can pass",
+          "isOptional": false
+        }
+      }
+    },
+    "451935cb-cd37-4fbe-ac8c-0a926e2b4ad5": {
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/windmill.svg",
+      "name": "Worker",
+      "build": {},
+      "deploy": {
+        "startCommand": "windmill",
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/nomideusz/windmill-railway",
+        "rootDirectory": "/server"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "variables": {
+        "MODE": {
+          "defaultValue": "worker",
+          "description": "Runs Python, TypeScript, Bash, Go, SQL and other jobs",
+          "isOptional": false
+        },
+        "WORKER_GROUP": {
+          "defaultValue": "default",
+          "description": "Worker group - its job tags are set in Windmill's Workers page",
+          "isOptional": false
+        },
+        "DATABASE_URL": {
+          "defaultValue": "postgres://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}?sslmode=disable",
+          "description": "Postgres on the private network",
+          "isOptional": false
+        },
+        "BASE_INTERNAL_URL": {
+          "defaultValue": "http://${{Windmill.RAILWAY_PRIVATE_DOMAIN}}:8000",
+          "description": "Where scripts reach the Windmill API (the wmill client) - the server on the private network",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "60",
+          "description": "Time to finish running jobs on redeploy",
+          "isOptional": false
+        }
+      }
+    },
+    "dc6cc52d-4bb2-431a-9700-8c9c794367cd": {
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/windmill.svg",
+      "name": "Native Worker",
+      "build": {},
+      "deploy": {
+        "startCommand": "windmill",
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/nomideusz/windmill-railway",
+        "rootDirectory": "/server"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "variables": {
+        "MODE": {
+          "defaultValue": "worker",
+          "description": "Runs lightweight native jobs in-process",
+          "isOptional": false
+        },
+        "WORKER_GROUP": {
+          "defaultValue": "native",
+          "description": "Handles native TypeScript (fetch), Postgres, MySQL, GraphQL and other native jobs",
+          "isOptional": false
+        },
+        "NATIVE_MODE": {
+          "defaultValue": "true",
+          "description": "Runs several native jobs at once in a single process",
+          "isOptional": false
+        },
+        "SLEEP_QUEUE": {
+          "defaultValue": "200",
+          "description": "Queue polling interval in ms",
+          "isOptional": false
+        },
+        "DATABASE_URL": {
+          "defaultValue": "postgres://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}?sslmode=disable",
+          "description": "Postgres on the private network",
+          "isOptional": false
+        },
+        "BASE_INTERNAL_URL": {
+          "defaultValue": "http://${{Windmill.RAILWAY_PRIVATE_DOMAIN}}:8000",
+          "description": "Where scripts reach the Windmill API (the wmill client) - the server on the private network",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "60",
+          "description": "Time to finish running jobs on redeploy",
+          "isOptional": false
+        }
+      }
+    },
+    "d3999495-c649-4004-9ccf-2cf8f0036bb7": {
+      "icon": "https://devicons.railway.app/i/postgresql.svg",
+      "name": "Postgres",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "ghcr.io/railwayapp-templates/postgres-ssl:17"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "variables": {
+        "POSTGRES_DB": {
+          "defaultValue": "windmill",
+          "description": "Database name",
+          "isOptional": false
+        },
+        "POSTGRES_USER": {
+          "defaultValue": "windmill",
+          "description": "Database user - a superuser, which Windmill's migrations need to create its roles",
+          "isOptional": false
+        },
+        "POSTGRES_PASSWORD": {
+          "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Auto-generated database password",
+          "isOptional": false
+        },
+        "PGDATA": {
+          "defaultValue": "/var/lib/postgresql/data/pgdata",
+          "description": "Data subdirectory - keeps Postgres happy on Railway volumes",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "60",
+          "description": "Time for Postgres to shut down cleanly on redeploy",
+          "isOptional": false
+        }
+      },
+      "volumeMounts": {
+        "27955b73-98a0-403d-971b-15e5c8d62303": {
+          "mountPath": "/var/lib/postgresql/data"
+        }
+      }
+    }
+  }
+}
