@@ -1,6 +1,6 @@
 # Deploy and Host Windmill Dev on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/windmill-dev?utm_medium=integration&utm_source=button&utm_campaign=windmill-dev)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/windmill-dev?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=windmill-dev)
 
 [Windmill](https://www.windmill.dev/) is the open-source developer platform for internal code: write a script in Python, TypeScript, Bash, Go, SQL or a dozen other languages, and Windmill gives it a generated UI, a webhook, a schedule and a place in multi-step flows with retries, approvals and branching. Build internal apps on top with a drag-and-drop editor. This template runs Windmill Community Edition 1.822.0 with a server, a job worker, a native worker and Postgres, and creates your superadmin on first boot, so Windmill's default `admin@windmill.dev` / `changeme` login never exists on a public URL.
 
