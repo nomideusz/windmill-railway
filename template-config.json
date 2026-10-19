@@ -11,7 +11,7 @@
         "restartPolicyMaxRetries": 10
       },
       "source": {
-        "repo": "https://github.com/nomideusz/windmill-railway",
+        "repo": "https://github.com/two-workspaces/windmill",
         "rootDirectory": "/server"
       },
       "networking": {
@@ -73,7 +73,7 @@
         "restartPolicyMaxRetries": 10
       },
       "source": {
-        "repo": "https://github.com/nomideusz/windmill-railway",
+        "repo": "https://github.com/two-workspaces/windmill",
         "rootDirectory": "/server"
       },
       "networking": {
@@ -118,7 +118,7 @@
         "restartPolicyMaxRetries": 10
       },
       "source": {
-        "repo": "https://github.com/nomideusz/windmill-railway",
+        "repo": "https://github.com/two-workspaces/windmill",
         "rootDirectory": "/server"
       },
       "networking": {

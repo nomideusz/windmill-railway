@@ -30,7 +30,7 @@ The stack is four services: Windmill, Worker, Native Worker and Postgres.
 
 - [Windmill documentation](https://www.windmill.dev/docs/intro)
 - [Windmill self-hosting guide](https://www.windmill.dev/docs/advanced/self_host)
-- [Template source on GitHub](https://github.com/nomideusz/windmill-railway)
+- [Template source on GitHub](https://github.com/two-workspaces/windmill)
 
 ### Implementation Details
 
